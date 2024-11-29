@@ -1,32 +1,18 @@
-import React, { useState} from "react";
-import { View, StyleSheet, Text } from "react-native";
-import TodoForm from "./app/ToDoForm";
-import TodoList from "./app/ToDoList";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './src/screens/HomeScreen';
+import AboutScreen from './src/screens/AboutScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
-
-  const [tasks, setTasks] = useState([
-    "Do Laundry",
-    "Go to gym",
-    "Walk dog",
-  ]);
-
-  const addTask = (taskText) => {
-      setTasks([...tasks, taskText]);
-  };
-
   return (
-    <View style={styles.container}>
-      <TodoForm addTask={addTask}/>
-      <TodoList tasks={tasks}/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "#fff",
-  },
-});
